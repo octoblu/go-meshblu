@@ -34,17 +34,18 @@ func (client *Client) SetAuth(uuid, token string) {
 
 // GetDevice returns a byte response of the meshblu device
 func (client *Client) GetDevice(uuid string) ([]byte, error) {
-	return client.getRequest(fmt.Sprintf("/v2/devices/%s", uuid))
+	return client.request("GET", fmt.Sprintf("/v2/devices/%s", uuid))
 }
 
-func (client *Client) getRequest(path string) ([]byte, error) {
+func (client *Client) request(method, path string) ([]byte, error) {
 	meshbluURL, err := config.ParseURL(client.uri)
 	if err != nil {
 		return nil, err
 	}
 	meshbluURL.SetPath(path)
 
-	response, err := http.Get(meshbluURL.String())
+	request, err := http.NewRequest(method, meshbluURL.String(), nil)
+	request.SetBasicAuth(client.uuid, client.token)
 	if err != nil {
 		return nil, err
 	}
