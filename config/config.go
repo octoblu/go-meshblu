@@ -7,10 +7,11 @@ import (
 
 // Config interfaces with a remote meshblu server
 type Config struct {
-	UUID   string `json:"uuid"`
-	Token  string `json:"token"`
-	Server string `json:"server"`
-	Port   int    `json:"port"`
+	UUID     string `json:"uuid"`
+	Token    string `json:"token"`
+	Server   string `json:"server"`
+	HostName string `json:"hostname"`
+	Port     int    `json:"port"`
 }
 
 // NewConfig constructs a new Meshblu instance
@@ -41,7 +42,11 @@ func (config *Config) ToJSON() ([]byte, error) {
 
 // ToURL serializes the object to the meshblu.json format
 func (config *Config) ToURL() (string, error) {
-	meshbluURI, err := NewURL(config.Server, config.Port)
+	hostName := config.HostName
+	if hostName == "" {
+		hostName = config.Server
+	}
+	meshbluURI, err := NewURL(hostName, config.Port)
 	if err != nil {
 		return "", err
 	}
