@@ -1,2 +1,3 @@
-# go-meshblu-http
-Meshblu HTTP Written in GO
+# go-meshblu
+
+Meshblu Client Written in GO
