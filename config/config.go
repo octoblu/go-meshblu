@@ -19,7 +19,7 @@ func NewConfig(UUID, Token, Server string, Port int) *Config {
 }
 
 // ReadFromConfig Reads the Config from a file
-func (config *Config) ReadFromConfig(path string) (*Config, error) {
+func ReadFromConfig(path string) (*Config, error) {
 	file, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
