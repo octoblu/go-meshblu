@@ -44,8 +44,14 @@ func (client *Client) request(method, path string) ([]byte, error) {
 	}
 	meshbluURL.SetPath(path)
 
+	client := &http.Client{}
 	request, err := http.NewRequest(method, meshbluURL.String(), nil)
 	request.SetBasicAuth(client.uuid, client.token)
+	if err != nil {
+		return nil, err
+	}
+
+	response, err := client.Do(request)
 	if err != nil {
 		return nil, err
 	}
