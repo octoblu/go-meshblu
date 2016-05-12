@@ -1,4 +1,4 @@
-package meshblu
+package config
 
 import (
 	"fmt"
@@ -12,6 +12,21 @@ type URL struct {
 	hostName string
 	port     int
 	uri      *url.URL
+}
+
+// NewURL parses a url
+func NewURL(hostName string, port int) (*URL, error) {
+	schema := "http"
+	if port == 443 {
+		schema = "https"
+	}
+	urlStr := fmt.Sprintf("%s://%s:%v", schema, hostName, port)
+	uri, err := url.Parse(urlStr)
+	if err != nil {
+		return nil, err
+	}
+
+	return &URL{hostName, port, uri}, nil
 }
 
 // ParseURL parses a url

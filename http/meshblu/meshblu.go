@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+
+	"github.com/octoblu/go-meshblu/config"
 )
 
 // Meshblu interfaces with a remote meshblu server
@@ -36,7 +38,7 @@ func (client *Client) GetDevice(uuid string) ([]byte, error) {
 }
 
 func (client *Client) getRequest(path string) ([]byte, error) {
-	meshbluURL, err := ParseURL(client.uri)
+	meshbluURL, err := config.ParseURL(client.uri)
 	if err != nil {
 		return nil, err
 	}
