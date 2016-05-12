@@ -19,8 +19,8 @@ type Client struct {
 	uri, uuid, token string
 }
 
-// Dail constructs a new Meshblu instance and creates a connection
-func Dail(uri string) (Meshblu, error) {
+// Dial constructs a new Meshblu instance and creates a connection
+func Dial(uri string) (Meshblu, error) {
 	return &Client{
 		uri: uri,
 	}, nil
