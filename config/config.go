@@ -16,7 +16,7 @@ type Config struct {
 
 // NewConfig constructs a new Meshblu instance
 func NewConfig(UUID, Token, Server string, Port int) *Config {
-	return &Config{UUID, Token, Server, Port}
+	return &Config{UUID, Token, Server, "", Port}
 }
 
 // ReadFromConfig Reads the Config from a file
